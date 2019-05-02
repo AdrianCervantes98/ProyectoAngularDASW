@@ -1,0 +1,22 @@
+<h1 id="titulo">
+    Inventario
+  </h1>
+  <table class="table table-borderless table-dark table-hover table-responsive{-sm|-md|-lg|-xl}
+   col-10" id="table">
+    <thead class="bg-secondary ">
+      <tr>
+        <th scope="col">Producto</th>
+        <th scope="col">Descripcion</th>
+        <th scope="col">Precio</th>
+        <th scope="col">Existencia</th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let item of this.adminservice.productos">
+      <tr>
+        <th scope="row">{{item.nombre}}</th>
+        <td>{{item.descripcion}}</td>
+        <td>{{item.precio}}</td>
+        <td>$ {{item.existencia}}</td>
+      </tr>
+    </tbody>
+  </table>

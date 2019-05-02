@@ -1,0 +1,68 @@
+<p>
+  admin-edit-item works!
+</p>
+
+<div class="container">
+    <h2>Editar producto</h2>
+  
+    <form #newItem="ngForm" (ngSubmit)="alta()" novalidate>
+  
+      <div class="form-group col-4">
+        <label for="subject">Nombre</label>
+        <input type="text" class="form-control" name="nombre" 
+        value="{{nombre}}"  [(ngModel)]="nombre" required>
+      </div>
+  
+      <div class="form-group col-4">
+        <label for="content">Categoria</label>
+        <select class="form-control" name="descripcion" [(ngModel)]="categoria" value="{{productosh.categoria}}">
+        <option *ngFor="let i of categorias">
+          {{i}}
+        </option>
+        </select>
+      </div>
+  
+      <div class="form-group col-4">
+        <label for="content">Precio</label>
+        <input type="number" class="form-control" name="precio" min="0" 
+        value="{{productosh.precio}}" [(ngModel)]="precio" required>
+      </div>
+  
+      <div class="form-group col-4">
+        <label for="content">URL de imagen</label>
+        <input type="text" class="form-control" value="{{productosh.url}}" 
+        name="img" [(ngModel)]="url" required>
+      </div>
+  
+      <div class="form-group col-4">
+        <label for="content">Descripcion</label>
+        <input type="text" class="form-control" name="descripcion" 
+        value="{{productosh.descripcion}}" [(ngModel)]="descripcion" required>
+      </div>
+  
+      <div class="form-group col-4">
+        <label for="content">Marca </label>
+        <select class="form-control" name="marca" [(ngModel)]="marca" value="{{productosh.marca}}" required>
+        <option *ngFor="let i of marcas">
+          {{i}}
+        </option>
+      </select>
+      </div>
+  
+      <div class="form-group col-4">
+        <label for="content">Codigo de barras</label>
+        <input type="text" class="form-control" name="codigo" value="{{productosh.codigo}}" 
+        [(ngModel)]="codigo" required>
+      </div>
+  
+      <div class="form-group col-4">
+        <label for="content">Existencias</label>
+        <input type="number" class="form-control" min="0" name="existencias" value="{{productosh.existencias}}"
+        [(ngModel)]="existencias" required>
+      </div>
+  
+      <button type="submit" [disabled]="!newItem.valid" class="btn btn-default btn-dark">Guardar</button>
+    </form>
+  
+  </div>
+  <p> {{newItem.value | json}}</p>

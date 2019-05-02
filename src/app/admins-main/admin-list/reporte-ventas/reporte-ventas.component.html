@@ -1,0 +1,26 @@
+<h1 id="titulo">
+  Reporte de ventas
+</h1>
+<table class="table table-borderless table-dark table-hover table-responsive{-sm|-md|-lg|-xl}
+ col-10" id="table">
+  <thead class="bg-secondary ">
+    <tr>
+      <th scope="col"></th>
+      <th scope="col">Usuario</th>
+      <th scope="col">Productos</th>
+      <th scope="col">Total</th>
+    </tr>
+  </thead>
+  <tbody *ngFor="let item of ArrayVtas">
+    <tr>
+      <th scope="row"></th>
+      <td>{{item.nombre}}</td>
+      <td>
+        <ul *ngFor="let i of item.productos, let x = index">
+          <li>{{x+1}}- Producto: {{i}}  Cantidad: {{item.cantidad[x]}}</li> 
+        </ul>
+      </td>
+      <td>$ {{item.total}}</td>
+    </tr>
+  </tbody>
+</table>
