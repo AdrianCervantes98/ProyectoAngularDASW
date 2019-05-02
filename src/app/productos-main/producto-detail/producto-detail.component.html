@@ -1,3 +1,14 @@
-<p>
-  producto-detail works!
-</p>
+<h1 align="center">Detalle del producto </h1>
+<div class="container">
+  <div class="media col-8 mt-2 border border-primary align-items-center ">
+      <img class="rounded-circle" src="https://www.sinplastico.com/3009-home_default/escoba-para-interior-de-pelo-natural.jpg" alt="">
+    <div class="media-body">
+      <h5>{{nombre}}</h5>
+      <p>Marca: {{marca}}</p>
+      <p>Categoría: {{categoria}}</p>
+      <p>Precio:${{precio}}.00</p>
+      <p>Existencia: {{existencia}}</p>
+    </div>
+  </div>
+  <button (click)="back()">¡Go Back!</button>  
+</div>

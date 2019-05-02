@@ -1,3 +1,32 @@
-<p>
-  producto works!
-</p>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+
+
+<div class="container">
+  <div class="row">
+      <div class="col-md-3 col-sm-6">
+          <div class="product-grid2">
+              <div class="product-image2">
+                  <a href="#">
+                      <img class="pic-1" src="https://www.sinplastico.com/3009-home_default/escoba-para-interior-de-pelo-natural.jpg">
+                      <img class="pic-2" src="http://bestjquery.com/tutorial/product-grid/demo3/images/img-2.jpeg">
+                  </a>
+                  <ul class="social">
+                      <li><a href="#" routerLink= "" data-tip="Detalles" (click)="infoProducto()"><i class="fa fa-eye"></i></a></li>
+                      <li><a  data-tip="Agregar carrito" (click)="anadirProducto()"><i class="fa fa-shopping-cart"></i></a></li>
+                  </ul>
+                <!--Hover de Carrito-->
+                <!-- <a class="add-to-cart" href="">Agregar al carrito</a> -->
+              </div>
+              <div class="product-content">
+                  <h3 class="title">{{producto.nombre}}</h3>
+                  <span class="price">${{producto.precio}}.00</span>
+              </div>
+          </div>
+      </div>
+  </div>
+

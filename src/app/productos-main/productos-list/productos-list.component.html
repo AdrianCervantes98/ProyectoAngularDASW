@@ -1,3 +1,32 @@
-<p>
-  productos-list works!
-</p>
+
+
+<div class="form-inline my-2 my-lg-0" id= "idk">
+  <input [(ngModel)]="searchText"  class="form-control mr-sm-2" type="search" placeholder="Buscar productos" aria-label="Search">
+  <button class="btn btn-outline-success my-2 my-sm-0" type="submit" (click)="searchproduct(searchText)">Buscar</button>
+</div>
+
+<div>
+    <h3 align="center">Lista de productos</h3>
+    
+    <div class="row" *ngIf="!showSearch">
+        <app-producto class="col-md-6 col-sm-8" *ngFor="let item of productos"  
+        [producto]="item" [producto] = productos (infoProduct)="inspeccionar($event)" > </app-producto>
+    </div>
+
+    <div class="row" *ngIf="showSearch">
+      <app-producto class="col-md-6 col-sm-8" *ngFor="let item of searchProduct"  
+      [producto]="item" [producto] = productos (infoProduct)="inspeccionar($event)" > </app-producto>
+  </div>
+
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+          <li class="page-item"><a class="page-link" href="#" routerLink="/products" (click)="currentPage(1)">1</a></li>
+          <li class="page-item"><a class="page-link" href="#" routerLink="/products" (click)="currentPage(2)">2</a></li>
+          <li class="page-item"><a class="page-link" href="#" routerLink="/products" (click)="currentPage(3)">3</a></li>
+          <li class="page-item"><a class="page-link" href="#" routerLink="/products" (click)="currentPage(4)">4</a></li>
+        </ul>
+      </nav>
+</div> 
+
+
+
