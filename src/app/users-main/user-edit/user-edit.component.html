@@ -1,0 +1,39 @@
+<div class="container-fluid">
+
+  <img class="rounded-circle d-block mx-auto" src="https://image.flaticon.com/icons/png/512/64/64572.png">
+
+
+  <form #f="ngForm" (ngSubmit)="save(f)" >
+      <div class="form-group">
+          <label for="">Nombre</label>
+          <input [(ngModel)]="user.nombre" type="text" class="form-control nombre"  name="nombre" id="" aria-describedby="helpId"
+              placeholder="Nombre usuario" required  >
+            </div>
+      
+      <div class="form-group">
+          <label for="">Domicilio</label>
+          <input [(ngModel)]="user.domicilio" type="text" class="form-control domicilio"  name="domicilio" id="" aria-describedby="helpId"
+              placeholder="Domicilio" required  >
+        </div>
+      <div class="form-group">
+          <label for="">Código Postal</label>
+          <input [(ngModel)]="user.cp" type="text" class="form-control cp"  name="cp" id="" aria-describedby="helpId"
+              placeholder="C.P." required  >
+        </div>
+      <div class="form-group">
+          <label for="">Correo</label>
+          <input [(ngModel)]="user.mail" type="text" class="form-control mail"  name="mail" id="" aria-describedby="helpId"
+              placeholder="Correo" required  >
+      </div>
+      <div class="form-group">
+          <label for="">Contraseña</label>
+          <input [(ngModel)]="user.password" type="text" class="form-control password"  name="password" id="" aria-describedby="helpId"
+              placeholder="Contraseña" required  >
+
+      </div>
+      <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="cancelar()">cancelar</button>
+          <button type="submit" class="btn btn-primary save" [disabled] = "!f.valid" >Guardar</button>
+      </div>
+  </form>
+</div>

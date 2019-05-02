@@ -1,0 +1,60 @@
+
+  <h1>Registro</h1>
+  <form #f="ngForm" (ngSubmit)="submit(f)">
+  <div id="Contenedor">
+      <div class="Icon">
+          <!--Icono de usuario-->
+          <img src="https://image.flaticon.com/icons/png/512/64/64572.png" alt="">
+      </div>
+      <!-- Comienzo del formulario Registro-->
+      <div class="ContentForm">
+              <div class="input-group input-group-lg">
+                  <span class="input-group-addon" id="sizing-addon1"><i
+                          class="glyphicon glyphicon-user"></i></span>
+                  <input [(ngModel)]="name" type="text" class="form-control" name="nombre" placeholder="Nombre" id="Nombre"
+                      aria-describedby="sizing-addon1" required>
+              </div>
+              <div class="input-group input-group-lg">
+                  <span class="input-group-addon" id="sizing-addon1"><i
+                          class="glyphicon glyphicon-user"></i></span>
+                  <input [(ngModel)]="address" type="text" class="form-control" name="domicilio" placeholder="Domicilio" id="Domicilio"
+                      aria-describedby="sizing-addon1" required>
+              </div>
+              <div class="input-group input-group-lg">
+                  <span class="input-group-addon" id="sizing-addon1"><i
+                          class="glyphicon glyphicon-user"></i></span>
+                  <input [(ngModel)]="date" type="date" class="form-control" name="fechanac" placeholder="Fecha de Nacimiento"
+                      id="Fechanac" aria-describedby="sizing-addon1" required>
+              </div>
+              <div class="input-group input-group-lg">
+                  <span class="input-group-addon" id="sizing-addon1"><i
+                          class="glyphicon glyphicon-user"></i></span>
+                  <input [(ngModel)]="cp" type="text" class="form-control" name="cp" placeholder="Código Postal" id="codigoPostal"
+                      aria-describedby="sizing-addon1" required>
+              </div>
+              <div class="input-group input-group-lg">
+                  <span class="input-group-addon" id="sizing-addon1"><i
+                          class="glyphicon glyphicon-user"></i></span>
+                  <input [(ngModel)]="mail" type="email" class="form-control" name="correo" placeholder="Correo" id="Correo"
+                      aria-describedby="sizing-addon1" required>
+              </div>
+
+              <br>
+              <div class="input-group input-group-lg">
+                  <span class="input-group-addon" id="sizing-addon1"><i
+                          class="glyphicon glyphicon-lock"></i></span>
+                  <input [(ngModel)]="password" type="password" name="contra" class="form-control" placeholder="Contraseña"
+                      aria-describedby="sizing-addon1" required>
+              </div>
+
+              <br>
+              <button class="btn btn-lg btn-primary btn-block btn-signin" id="IngresoLog"
+                  type="submit" [disabled] = "!f.valid">Registrarse</button>
+      </div>
+  </div>
+</form>
+<p>{{f.value|json}}</p>
+<p>{{name}} {{address}} {{date}} {{cp}} {{mail}} {{password}}</p>
+
+
+

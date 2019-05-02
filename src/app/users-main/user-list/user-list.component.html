@@ -1,0 +1,21 @@
+<h1>Lista de usuarios</h1>
+<br>
+<div class="form-inline my-2 my-lg-0" id="button">
+  <input [(ngModel)]="searchText" class="form-control mr-sm-2" type="search" placeholder="Buscar usuarios" aria-label="Search">
+  <button class="btn btn-outline-success my-2 my-sm-0" type="submit" (click)="searchName(searchText)">Buscar</button>
+</div>
+
+<div *ngIf="!searchDisplay" class = "media-list lista justify-content-left">
+  <app-user *ngFor = "let item of users" [user] = "item"></app-user>
+</div>
+<div *ngIf="searchDisplay" class = "media-list lista justify-content-left">
+  <app-user *ngFor = "let item of searchUsers" [user] = "item"></app-user>
+</div>
+<nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-center">
+    <li class="page-item"><a class="page-link" href="#" routerLink="/showUsers" (click)="currentPage(1)">1</a></li>
+    <li class="page-item"><a class="page-link" href="#" routerLink="/showUsers" (click)="currentPage(2)">2</a></li>
+    <li class="page-item"><a class="page-link" href="#" routerLink="/showUsers" (click)="currentPage(3)">3</a></li>
+  </ul>
+</nav>
+

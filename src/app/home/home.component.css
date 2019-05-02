@@ -1,0 +1,212 @@
+h1 {
+    font-size: 350%;
+    text-align: center;
+}
+
+/*Propiedades del container*/
+#container{
+    width: 60%;
+    margin-right:auto;
+    margin-left: auto;
+    background-color: black;
+    position: initial;
+
+}
+.parrafo-ofertas{
+    font-size: 30px;
+    text-align: center;
+    font-family: sans-serif;
+    font-weight: bolder;
+    font-style: italic;
+    color: antiquewhite;
+}
+/*Propiedades del carrusel*/
+#Carrusel-ofertas{
+    width: 100%;
+    justify-self: center;
+    color: black;
+    text-align: center;
+    margin-right:auto;
+    margin-left: auto;
+}
+/*Propiedades del contenedor de las img en carrusel*/
+#Carrusel-ofertas img{
+    margin-right:auto;
+    margin-left: auto;
+}
+/*Pendiente-----*/
+.indicadores{
+    position: initial;
+    margin-right:auto;
+    margin-left: auto;
+    bottom: 30px;
+    padding-left: 0;
+    list-style: circle;
+    text-align: center;
+}
+
+.indicadores i{
+    color:whitesmoke;
+}
+i.fas.fa-circle {
+    border-color: black;
+    border-width: 2px;
+    border-style: inset;
+    border-radius: 25px;
+}
+.d-block{
+    width: 450px;
+    height: 450px;;
+}
+/* Fin de elementos del carrusel*/
+
+/*Propiedades del footer*/
+#footer{
+  position: absolute;
+  background-color:rgb(74, 75, 78);
+  color: blue;
+  width: 100%;
+  margin-top: 10px;
+}
+/*Propiedades del texto del footer*/
+#footer div p{
+  background-color:rgb(74, 75, 78);
+  color: white;
+  font-size: 15px;
+}
+/*Propiedades de los iconos del footer*/
+#footer div ul{
+  font-size: 25px;
+  color: whitesmoke;
+}
+#footer div ul a:visited{
+  color: whitesmoke;
+}
+#Facebook-logo:hover{
+  color:#3b5998;
+}
+#Twiter-logo:hover{
+  color:#00aced;
+}
+#Whatsapp-logo:hover{
+  color:#25d366;
+}
+/*fin de Propiedades del footer*/
+  
+  @font-face {
+    font-family: 'Vampiro One';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Vampiro One'), local('VampiroOne-Regular'), url(http://themes.googleusercontent.com/static/fonts/vampiroone/v3/Ho2Xld8UbQyBA8XLxF1_NYbN6UDyHWBl620a-IRfuBk.woff) format('woff');
+  }
+   
+  
+  
+   h1 a{
+    text-decoration:none;
+    -webkit-transition: all 0.5s;
+    -moz-transition: all 0.5s;
+    transition: all 0.5s;
+  }
+  
+  
+  
+  h1 a{
+    font-size:1.5em;
+    color:#228DFF;
+    font-family:Iceland;
+  }
+  h1 a:hover{
+    -webkit-animation: neon2 1.5s ease-in-out infinite alternate;
+    -moz-animation: neon2 1.5s ease-in-out infinite alternate;
+    animation: neon2 1.5s ease-in-out infinite alternate;
+  }
+  
+  
+  
+  h1 a:hover{
+  color:#ffffff;
+  }
+  
+  
+  
+  
+  
+  @-webkit-keyframes neon2 {
+    from {
+      text-shadow: 0 0 10px #fff,
+                 0 0 20px  #fff,
+                 0 0 30px  #fff,
+                 0 0 40px  #228DFF,
+                 0 0 70px  #228DFF,
+                 0 0 80px  #228DFF,
+                 0 0 100px #228DFF,
+                 0 0 150px #228DFF;
+    }
+    to {
+      text-shadow: 0 0 5px #fff,
+                 0 0 10px #fff,
+                 0 0 15px #fff,
+                 0 0 20px #228DFF,
+                 0 0 35px #228DFF,
+                 0 0 40px #228DFF,
+                 0 0 50px #228DFF,
+                 0 0 75px #228DFF;
+    }
+  }
+  
+  
+  
+ 
+  
+  @-moz-keyframes neon2 {
+    from {
+      text-shadow: 0 0 10px #fff,
+                 0 0 20px  #fff,
+                 0 0 30px  #fff,
+                 0 0 40px  #228DFF,
+                 0 0 70px  #228DFF,
+                 0 0 80px  #228DFF,
+                 0 0 100px #228DFF,
+                 0 0 150px #228DFF;
+    }
+    to {
+      text-shadow: 0 0 5px #fff,
+                 0 0 10px #fff,
+                 0 0 15px #fff,
+                 0 0 20px #228DFF,
+                 0 0 35px #228DFF,
+                 0 0 40px #228DFF,
+                 0 0 50px #228DFF,
+                 0 0 75px #228DFF;
+    }
+  }
+  
+ 
+  
+  
+  
+  @keyframes neon2 {
+    from {
+      text-shadow: 0 0 10px #fff,
+                 0 0 20px  #fff,
+                 0 0 30px  #fff,
+                 0 0 40px  #228DFF,
+                 0 0 70px  #228DFF,
+                 0 0 80px  #228DFF,
+                 0 0 100px #228DFF,
+                 0 0 150px #228DFF;
+    }
+    to {
+      text-shadow: 0 0 5px #fff,
+                 0 0 10px #fff,
+                 0 0 15px #fff,
+                 0 0 20px #228DFF,
+                 0 0 35px #228DFF,
+                 0 0 40px #228DFF,
+                 0 0 50px #228DFF,
+                 0 0 75px #228DFF;
+    }
+  }
+  
+  

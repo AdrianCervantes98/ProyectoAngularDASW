@@ -1,0 +1,31 @@
+
+  <h1> Inicio de sesión</h1>
+<form #f="ngForm" (ngSubmit)="submit(f)">
+<div id="Contenedor">
+
+  <div class="Icon">
+      <!--Icono de usuario-->
+      <img src="https://image.flaticon.com/icons/png/512/64/64572.png" alt="">
+   </div>
+
+  
+
+    <div class="ContentForm">
+      <div class="input-group input-group-lg">
+        <span class="input-group-addon" id="sizing-addon1"><i class="glyphicon glyphicon-user"></i></span>
+         <input [(ngModel)]="mail" type="email" class="form-control" name="correo" placeholder="Correo" id="Correo" aria-describedby="sizing-addon1" required>
+      </div>
+      
+      <br>
+      <div class="input-group input-group-lg">
+      <span class="input-group-addon" id="sizing-addon1"><i class="glyphicon glyphicon-lock"></i></span>
+      <input [(ngModel)]="password" type="password" name="contra" class="form-control" placeholder="******" aria-describedby="sizing-addon1" required>
+      </div>
+      
+      <br>
+      <button type="submit" class="btn btn-lg btn-primary btn-block btn-signin" [disabled] = "!f.valid">Iniciar Sesión</button>
+      <div class="opcioncontra"><a href="" routerLink = '/register'>¿No tienes una cuenta? ¡Regístrate!</a></div>
+    </div>
+</div> 
+</form> 
+
