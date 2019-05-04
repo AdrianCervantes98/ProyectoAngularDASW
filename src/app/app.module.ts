@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -23,6 +22,16 @@ import { ProductosEditComponent } from './productos-main/productos-edit/producto
 import { ProductoDetailComponent } from './productos-main/producto-detail/producto-detail.component';
 import { ProductoComponent } from './productos-main/productos-list/producto/producto.component';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { AdminAddComponent } from './admins-main/admin-edit/admin-add/admin-add.component';
+import { AdminDelComponent } from './admins-main/admin-edit/admin-del/admin-del.component';
+import { AdminEditItemComponent } from './admins-main/admin-edit/admin-edit-item/admin-edit-item.component';
+import { ReporteVentasComponent } from './admins-main/admin-list/reporte-ventas/reporte-ventas.component';
+import { InventarioComponent } from './admins-main/admin-list/inventario/inventario.component';
+import { CarritoComponent } from './carrito/carrito.component';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { ProductosService } from './productos-main/productos.service';
+import { VentaComponent } from './venta/venta.component';
+// import { HttpModule} from '@angular/http';
 
 @NgModule({
   declarations: [
@@ -40,6 +49,12 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
     AdminEditComponent,
     AdminListComponent,
     AdminComponent,
+    AdminAddComponent,
+    AdminDelComponent,
+    AdminEditItemComponent,
+    ReporteVentasComponent,
+    InventarioComponent,
+    CarritoComponent,
     ProductosMainComponent,
     ProductosListComponent,
     ProductosEditComponent,
@@ -50,9 +65,10 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    HttpClientModule,
     BsDropdownModule.forRoot(),
   ],
-  providers: [],
+  providers: [ProductoDetailComponent, ProductosService, VentaComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Venta } from 'src/app/venta/venta';
 import { AdminsService } from '../../admins.service';
-import { Producto } from 'src/app/productos-main/producto';
+import { producto } from 'src/app/productos-main/producto';
 import { VentaComponent } from 'src/app/venta/venta.component';
 
 @Component({
@@ -13,7 +13,6 @@ export class ReporteVentasComponent implements OnInit {
 
   constructor(
     private adminservice: AdminsService,
-    // private vtasservice: VentaComponent,
   ) { }
 
   ArrayVtas: Venta[] = this.adminservice.vtas;

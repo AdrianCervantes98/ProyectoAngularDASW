@@ -23,11 +23,15 @@ export class LogComponent implements OnInit {
 
   submit(formulario: NgForm) {
     if (this.userService.containsMail(this.mail)) {
+      if (this.userService.containsAdmin(this.mail)) {
+        this.userService.admin = true;
+      }
       if (this.userService.passwordMatch(this.password, this.userService.getUserId(this.mail))) {
         this.user = this.userService.getUser(this.userService.getUserId(this.mail));
         alert(`Bienvenido ${this.user.nombre}`);
         this.userService.userLogged = true;
         this.userService.loggedUser = this.user;
+        console.log(this.userService.admin);
         this.router.navigate(['/home']);
       }
     } else {

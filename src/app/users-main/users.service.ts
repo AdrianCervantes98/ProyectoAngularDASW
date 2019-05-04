@@ -11,6 +11,7 @@ export class UsersService {
   private lastid = 1;
   userLogged = false;
   loggedUser: User;
+  admin: boolean;
 
   users: User[] = [
     new User(this.lastid++, 'Pallandro', 'Avenida Primavera 123', new Date('05-03-1998'), 45050, 'pallandro@iteso.mx', 'pallandro'),
@@ -44,6 +45,12 @@ export class UsersService {
     'j@iteso.mx',
   ];
 
+  admins: string[] = [
+    'pallandro@iteso.mx',
+    'iangibson@iteso.mx',
+    'harry@iteso.mx'
+  ];
+
   constructor() { }
 
   getNextId(): number {
@@ -52,6 +59,10 @@ export class UsersService {
 
   containsMail(mail: string): boolean {
     return this.usersMails.includes(mail);
+  }
+
+  containsAdmin(mail: string): boolean {
+    return this.admins.includes(mail);
   }
 
   addMail(mail: string) {

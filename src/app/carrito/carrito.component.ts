@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { producto } from '../productos-main/producto';
 import { ProductosService } from '../productos-main/productos.service';
+import { VentaComponent } from '../venta/venta.component';
+import { Venta } from '../venta/venta';
+import { UsersService } from '../users-main/users.service';
+import { AdminsService } from '../admins-main/admins.service';
 
 @Component({
   selector: 'app-carrito',
@@ -10,10 +14,20 @@ import { ProductosService } from '../productos-main/productos.service';
 export class CarritoComponent implements OnInit {
 
   carrito: producto[];
+  cantprod: number[];
   emptyCar: boolean;
   total: number;
+  usuario = '';
 
-  constructor(private productoService: ProductosService) { }
+  nameproductos: string[] = [];
+  canttidad: number[] = [];
+
+  constructor(
+    private productoService: ProductosService,
+    private vtasservice: VentaComponent,
+    private userservice: UsersService,
+    private adminservice: AdminsService,
+  ) { }
 
   ngOnInit() {
     this.carrito = this.productoService.getCarrito();
@@ -32,7 +46,10 @@ export class CarritoComponent implements OnInit {
     }
     return tot;
   }
+
   resetCar() {
+    this.getArrayProductos();
+    this.adminservice.crearVenta(new Venta(this.userservice.loggedUser.nombre, this.nameproductos, this.canttidad, this.total));
     this.productoService.carrito.length = 0;
   }
 
@@ -45,7 +62,13 @@ export class CarritoComponent implements OnInit {
     }
   }
 
-
-  
+  getArrayProductos() {
+    this.carrito.forEach(element => {
+      this.nameproductos.push(element.nombre);
+    });
+    this.cantprod.forEach(element => {
+      this.canttidad.push(element);
+    });
+  }
 
 }

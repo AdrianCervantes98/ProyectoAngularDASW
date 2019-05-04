@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AdminsService } from '../admins.service';
-import { Producto } from 'src/app/productos-main/producto';
+import { producto } from 'src/app/productos-main/producto';
 
 @Component({
   selector: 'app-admin-edit',

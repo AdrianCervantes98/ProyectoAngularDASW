@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Producto } from 'src/app/productos-main/producto';
+import { producto } from 'src/app/productos-main/producto';
 import { AdminsService } from '../../admins.service';
 import { ProductosService } from 'src/app/productos-main/productos.service';
 
@@ -12,8 +12,9 @@ export class AdminEditItemComponent implements OnInit {
 
   marcas = this.adminservice.getMarcas();
   categorias = this.adminservice.getCategorias();
+
   // valores de el producto a seleccionar
-  productosh = ProductosService.getItem();
+  productosh = this.adminservice.getItem(this.adminservice.getIdItem());
 
   nombre = this.productosh.nombre;
   precio = this.productosh.precio;
@@ -31,7 +32,7 @@ export class AdminEditItemComponent implements OnInit {
   ngOnInit() {
   }
   editar() {
-    const p = new Producto(this.adminservice.lastId, this.nombre, this.precio,
+    const p = new producto(this.adminservice.lastId, this.nombre, this.precio,
       this.categoria, this.descripcion, this.marca, this.codigo, this.existencias, this.url);
     this.adminservice.actualizarItem(p);
   }

@@ -17,7 +17,7 @@ export class ProductoDetailComponent implements OnInit {
   precio: number;
   existencia: number;
 
-  constructor(private productosService: ProductosService, 
+  constructor(private productosService: ProductosService,
               private router: Router,
               private route: ActivatedRoute,
               private location: Location) { }
@@ -36,8 +36,8 @@ export class ProductoDetailComponent implements OnInit {
     );
   }
 
-  //Regresar a la pantalla anterior
-  back(){
+  // Regresar a la pantalla anterior
+  back() {
     this.location.back();
   }
 

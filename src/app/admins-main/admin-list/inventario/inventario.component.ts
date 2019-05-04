@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AdminsService } from '../../admins.service';
+import { ProductosService } from 'src/app/productos-main/productos.service';
 
 @Component({
   selector: 'app-inventario',
@@ -9,10 +10,11 @@ import { AdminsService } from '../../admins.service';
 export class InventarioComponent implements OnInit {
 
   constructor(
-    private adminservice: AdminsService,
+    private adminservice: AdminsService, private productoService: ProductosService
   ) { }
 
   ngOnInit() {
+    
   }
 
 }

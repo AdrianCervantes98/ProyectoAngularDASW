@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Producto } from 'src/app/productos-main/producto';
+import { producto } from 'src/app/productos-main/producto';
 import { AdminsService } from '../../admins.service';
+import { HttpClientModule } from '@angular/common/http';
+import { ProductoDetailComponent } from 'src/app/productos-main/producto-detail/producto-detail.component';
+
 
 @Component({
   selector: 'app-admin-add',
@@ -8,7 +11,8 @@ import { AdminsService } from '../../admins.service';
   styleUrls: ['./admin-add.component.css']
 })
 export class AdminAddComponent implements OnInit {
-  producto: Producto;
+
+  producto: producto;
   marcas = this.adminservice.getMarcas();
   categorias = this.adminservice.getCategorias();
   nombre = '';
@@ -20,26 +24,18 @@ export class AdminAddComponent implements OnInit {
   existencias = 0;
   url = '';
 
-  // myForm: FormGroup;
   constructor(
-    private adminservice: AdminsService
-    // public fb: FormBuilder,
-  ) {
-    // this.myForm = this.fb.group({
-    //   name: ['', [Validators.required]],
-    //   company: ['', [Validators.required]],
-    //   email: ['', [Validators.required]],
-    //   age: ['', [Validators.required]],
-    //   url: ['', [Validators.required]],
-    //   password: ['', [Validators.required]],
-    // });
-  }
+    private adminservice: AdminsService,
+    private productoDet: ProductoDetailComponent
+
+  ) { }
 
   ngOnInit() {
   }
 
   alta() {
-    this.adminservice.CrearItem(new Producto(this.adminservice.lastId, this.nombre, this.precio,
+    this.adminservice.CrearItem(new producto(this.adminservice.lastId, this.nombre, this.precio,
       this.categoria, this.descripcion, this.marca, this.codigo, this.existencias, this.url));
   }
 }
+

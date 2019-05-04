@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Producto } from '../productos-main/producto';
 import { AdminsService } from '../admins-main/admins.service';
 import { Venta } from './venta';
 
@@ -22,7 +21,7 @@ export class VentaComponent implements OnInit {
   ngOnInit() {
   }
 
-  NewVta() {
-    this.adminservice.crearVenta(new Venta(this.usuario, this.productos, this.cantidades, this.total));
+  NewVta(V: Venta) {
+    this.adminservice.crearVenta(V);
   }
 }

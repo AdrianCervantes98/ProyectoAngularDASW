@@ -8,6 +8,7 @@ import { UsersService } from '../users-main/users.service';
 })
 export class HeaderComponent implements OnInit {
 
+
   constructor(private userService: UsersService) { }
 
   ngOnInit() {
@@ -17,8 +18,13 @@ export class HeaderComponent implements OnInit {
     return this.userService.userLogged;
   }
 
+  getAdmin(): boolean {
+    return this.userService.admin;
+  }
+
   logout() {
     this.userService.userLogged = false;
     this.userService.loggedUser = null;
+    this.userService.admin = false;
   }
 }
