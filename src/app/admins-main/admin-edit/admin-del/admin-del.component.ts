@@ -17,7 +17,8 @@ export class AdminDelComponent implements OnInit {
   ngOnInit() {
   }
   borrar() {
-    this.adminservice.deleteItem(this.idnum);
+    this.producto = this.adminservice.getItem(this.idnum);
+    this.adminservice.deleteItem(this.idnum, this.producto );
     console.log(this.adminservice.toConsole());
   }
 

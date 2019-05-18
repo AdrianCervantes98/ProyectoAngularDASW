@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { producto } from '../productos-main/producto';
 import { ProductosService } from '../productos-main/productos.service';
-import { VentaComponent } from '../venta/venta.component';
 import { Venta } from '../venta/venta';
 import { UsersService } from '../users-main/users.service';
 import { AdminsService } from '../admins-main/admins.service';
@@ -13,18 +12,18 @@ import { AdminsService } from '../admins-main/admins.service';
 })
 export class CarritoComponent implements OnInit {
 
+  // arreglo de productos para el carrito
   carrito: producto[];
-  cantprod: number[];
+
   emptyCar: boolean;
   total: number;
   usuario = '';
 
   nameproductos: string[] = [];
-  canttidad: number[] = [];
+  cantidad: number[] = [];
 
   constructor(
     private productoService: ProductosService,
-    private vtasservice: VentaComponent,
     private userservice: UsersService,
     private adminservice: AdminsService,
   ) { }
@@ -37,6 +36,7 @@ export class CarritoComponent implements OnInit {
       this.emptyCar = false;
     }
     this.total = this.calculateTotal(this.carrito);
+    this.cantidad = this.productoService.cantprod;
   }
 
   calculateTotal(car): number {
@@ -49,8 +49,10 @@ export class CarritoComponent implements OnInit {
 
   resetCar() {
     this.getArrayProductos();
-    this.adminservice.crearVenta(new Venta(this.userservice.loggedUser.nombre, this.nameproductos, this.canttidad, this.total));
+// tslint:disable-next-line: max-line-length
+    this.adminservice.crearVenta(new Venta(this.userservice.loggedUser.nombre, this.nameproductos, this.productoService.cantprod, this.total));
     this.productoService.carrito.length = 0;
+    this.productoService.cantprod.length = 0;
   }
 
   removeFromCart(prod) {
@@ -63,12 +65,11 @@ export class CarritoComponent implements OnInit {
   }
 
   getArrayProductos() {
+
     this.carrito.forEach(element => {
       this.nameproductos.push(element.nombre);
     });
-    this.cantprod.forEach(element => {
-      this.canttidad.push(element);
-    });
+// hace falta añadir cantidad para poder realizar esto
   }
 
 }

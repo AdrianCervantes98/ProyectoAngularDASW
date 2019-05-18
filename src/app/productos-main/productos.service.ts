@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { producto } from './producto';
+import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -7,43 +9,34 @@ import { producto } from './producto';
 export class ProductosService {
 
   // cambiaDato = new Subject<producto[]>();
+  local = environment.apiUrl;
   lastId = 1;
-  marcas: string [] = [
-    'Duracell',
+  marcas: string[] = [
+    'Gaona',
     'Dove',
-    'Nivea',
-    'La rosa',
-    'La costeña'
+    'Dulces',
   ];
 
   // Arreglo de las categorias
   categorias: string[] = [
-    'Abarrote',
-    'Pilas',
+    'Abarrotes',
+    'Limpieza',
     'Perfumeria',
-    'Dulceria'
+    'Dulceria',
+    'Personal'
   ];
 
-  productos: producto[] = [
-    new producto(this.lastId++, 'jabon rosa', 23, this.categorias[2],
-    'jabon de barra', this.marcas[1], 'AFFFKLJMP', 102, ''),
-
-    new producto(this.lastId++, 'Baterias AA', 13, this.categorias[0],
-    'baterias 2AA', this.marcas[0], 'AAAAFDSD', 111, ''),
-
-    new producto(this.lastId++, 'Bombones con chocolate', 26, this.categorias[3],
-    'baterias 2AA', this.marcas[3], 'QQAAFDSD', 191, ''),
-
-    new producto(this.lastId++, 'Crema para piel', 36, this.categorias[2],
-    'Crema para el cuerpo', this.marcas[2], 'QDAAHSZ', 191, ''),
-  ];
+  public productos: producto[] = [];
 
   carrito: producto[] = [];
+  cantprod: number[] = [];
+  constructor(private http: HttpClient) { }
 
-  constructor() { }
-
-  getProductos(): producto[] {
-    return this.productos.slice();
+  getProductos() {
+    this.http.get(this.local + '/productos').subscribe((data: producto[]) => {
+      console.log(data);
+      this.productos = data;
+    });
   }
 
   getProducto(id: number) {
@@ -51,12 +44,14 @@ export class ProductosService {
     return Object.assign({}, this.productos[pos]);
   }
 
-  // private notificarCambios() {
-  //   this.cambiaDato.next(this.productos.slice());
-  // }
-
   addCarrito(prod: producto) {
-    this.carrito.push(prod);
+
+    if (this.carrito.length === 0) {
+      this.carrito.push(prod);
+      this.cantprod.push(1);
+      return;
+    }
+    this.repetidos(prod);
   }
 
   removeCarrito(prod: producto) {
@@ -68,6 +63,28 @@ export class ProductosService {
     return this.carrito.slice();
   }
 
+  private repetidos(prod: producto) {
 
+    // if (this.carrito[this.carrito.length - 1].id === prod.id) {
+    //   console.log('entra a if');
+    //   this.cantprod[this.cantprod.length - 1]++;
+    //   return;
+    // } else {
+    //   this.carrito.push(prod);
+    //   this.cantprod.push(1);
+    for (let i = 0; i < this.carrito.length; i++) {
+      if (this.carrito[i].id === prod.id) {
+        this.cantprod[i]++;
+        return;
+      }
+    }
+
+    this.carrito.push(prod);
+    this.cantprod.push(1);
+
+  }
 
 }
+
+
+

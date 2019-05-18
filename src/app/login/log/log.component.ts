@@ -19,6 +19,7 @@ export class LogComponent implements OnInit {
               private router: Router) { }
 
   ngOnInit() {
+    this.userService.getUsers();
   }
 
   submit(formulario: NgForm) {

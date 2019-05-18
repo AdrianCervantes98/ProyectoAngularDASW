@@ -10,13 +10,14 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-  user = new User(0, '', '', new Date(), 0, '', '');
+  user = new User(0, '', '', new Date(), 0, '', '', '', '');
   name = '';
   address = '';
   date = new Date();
   cp = '';
   mail = '';
   password = '';
+  rol = '';
 
 
   constructor(private userService: UsersService,

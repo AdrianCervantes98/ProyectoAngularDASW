@@ -1,75 +1,28 @@
 import { Injectable } from '@angular/core';
 import { producto } from '../productos-main/producto';
-import { Subject } from 'rxjs';
 import { Venta } from '../venta/venta';
 import { ProductosService } from '../productos-main/productos.service';
 import { ProductoDetailComponent } from '../productos-main/producto-detail/producto-detail.component';
+import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AdminsService {
-  // cambiaDato = new Subject<producto[]>();
-  // AgregaVta = new Subject<Venta[]>();
-
   // id para los pridutos
-  lastId = 1;
-
-  // Arreglo de las marcas
-  // marcas: string [] = [
-  //   'Duracell',
-  //   'Dove',
-  //   'Nivea',
-  //   'La rosa',
-  //   'La costeña'
-  // ];
-
-  // // Arreglo de las categorias
-  // categorias: string[] = [
-  //   'Abarrote',
-  //   'Pilas',
-  //   'Perfumeria',
-  //   'Dulceria'
-  // ];
-
-  // Arreglo de los productos
-  // productos: Producto[] = [
-  //   new Producto(this.lastId++, 'jabon rosa', 23, this.categorias[2],
-  //   'jabon de barra', this.marcas[1], 'AFFFKLJMP', 102, ''),
-
-  //   new Producto(this.lastId++, 'Baterias AA', 13, this.categorias[0],
-  //   'baterias 2AA', this.marcas[0], 'AAAAFDSD', 111, ''),
-
-  //   new Producto(this.lastId++, 'Bombones con chocolate', 26, this.categorias[3],
-  //   'baterias 2AA', this.marcas[3], 'QQAAFDSD', 191, ''),
-  //   // new Producto(this.lastId++, 'jabon azul', 33, 'jabon'),
-  // ];
-
-  x = Number[2] = [
-    12, 23, 10
-  ];
-
-  productos: producto[] = this.prodservice.getProductos();
+  local = environment.apiUrl;
+  productos: producto[] = this.prodservice.productos;
   nameproducts: string[] = [];
-
+  lastId = this.productos.length + 1;
   // Arreglo de las Ventas
-  vtas: Venta[] = [
-    new Venta('julian', this.nameproducts, this.x , 112),
-    new Venta('David', this.nameproducts, this.x, 12)
-  ];
+  vtas: Venta[] = [];
 
   constructor(
     private prodservice: ProductosService,
     private prodDetail: ProductoDetailComponent,
+    private http: HttpClient
   ) { }
-
-  // private notificarCambios() {
-  //   this.cambiaDato.next(this.prodservice.productos.slice());
-  // }
-
-  // private notificarCambiosVtas() {
-  //   this.AgregaVta.next(this.vtas.slice());
-  // }
 
   AvisoOperacion(estatus: boolean) {
     if (estatus === true) {
@@ -88,24 +41,49 @@ export class AdminsService {
   }
 
   // elimina un elemento
-  deleteItem(id: number) {
-    if (id <= 0) {
-      return alert('Error');
+// tslint:disable-next-line: no-shadowed-variable
+  deleteItem(id: number, producto: producto) {
+    if (id <= 0 || id > this.productos.length) {
+      return alert('Error id invalido');
     }
-    const pos = this.prodservice.productos.findIndex(al => al.id === id);
     const op = confirm('¿seguro que quiere elimar este elemnto?');
-    if (op === true) {
-      // eliminamos
-      if (pos >= 0) {
-        this.prodservice.productos.splice(pos, 1);
-        // this.notificarCambios();
-      }
-    }
+    
+    const body = {
+      id: producto.id,
+    };
+
+    // if (op === true) {
+      // this.http.delete('http://127.0.0.1:3003/api/producto/:id', body)
+    //   .subscribe((data: producto) => {
+    //     console.log(data);
+    //   }, (err) => {
+    //     console.log(err);
+    //   });
+    // }
     return this.AvisoOperacion(op);
   }
 
   // crea un nuevo producto
-  CrearItem( producto: producto) {
+// tslint:disable-next-line: no-shadowed-variable
+  CrearItem(producto: producto) {
+    const body = {
+      id: this.lastId,
+      nombre: producto.nombre,
+      precio: producto.precio,
+      categoria: producto.categoria,
+      descripcion: producto.descripcion,
+      marca: producto.marca,
+      codigo: producto.codigo,
+      existencia: producto.existencia,
+      url: producto.url
+    };
+    console.log(body);
+    this.http.post(this.local + '/productos', body)
+      .subscribe((data: producto) => {
+        console.log(data);
+      }, (err) => {
+        console.log(err);
+      });
     this.prodservice.productos.push(producto);
     this.lastId++;
    // this.notificarCambios();
@@ -117,10 +95,31 @@ export class AdminsService {
   }
 
   // edita un producto
+// tslint:disable-next-line: no-shadowed-variable
   actualizarItem(producto: producto) {
-    const pos = this.prodservice.productos.findIndex(al => al.id === producto.id);
-    this.prodservice.productos.splice(pos, 1, producto);
-    // this.notificarCambios();
+
+    const body = {
+      id: producto.id,
+      nombre: producto.nombre,
+      precio: producto.precio,
+      categoria: producto.categoria,
+      descripcion: producto.descripcion,
+      marca: producto.marca,
+      codigo: producto.codigo,
+      existencia: producto.existencia,
+      url: producto.url
+    };
+
+    console.log(body);
+    this.http.patch(this.local + '/productos', body)
+      .subscribe((data: producto) => {
+        console.log(data);
+      }, (err) => {
+        console.log(err);
+      });
+
+    this.prodservice.productos.push(producto);
+   // this.notificarCambios();
     this.AvisoOperacion(true);
   }
 
@@ -151,23 +150,38 @@ export class AdminsService {
     return this.nameproducts;
   }
 
-  // devuelve el arreglo de la cantidad de cada producto en una venta
-  // getCantidadProductos(v: Venta) {
-  //   this.productos.forEach(element => {
-  //     // this.nameproductos.push(element.cantidad);
-  //   });
-  //   return this.nameproductos;
-  // }
-
   // crea una nueva venta
   crearVenta(V: Venta) {
+    // this.vtas.push(V);
+    // // this.notificarCambiosVtas();
+    // this.AvisoOperacion(true);
+    const f = new Date();
+    const body = {
+      carrito: V.nombre,
+      total: V.total,
+      estado: false,
+      date: f
+    };
+
+    console.log(body);
+    this.http.post(this.local + '/ventas', body)
+      .subscribe((data: Venta) => {
+        console.log(data);
+      }, (err) => {
+        console.log(err);
+        this.AvisoOperacion(false);
+      });
+
     this.vtas.push(V);
-    // this.notificarCambiosVtas();
-    this.AvisoOperacion(true);
   }
 
   // Regresa el id de el producto detalle en cuestion
   getIdItem() {
     return this.prodDetail.id;
   }
+  borradopermante(id: number) {
+    const pos = this.prodservice.productos.findIndex(al => al.id === id);
+    this.prodservice.productos.splice(pos, 1);
+  }
+
 }

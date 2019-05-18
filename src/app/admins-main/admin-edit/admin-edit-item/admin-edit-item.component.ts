@@ -16,14 +16,15 @@ export class AdminEditItemComponent implements OnInit {
   // valores de el producto a seleccionar
   productosh = this.adminservice.getItem(this.adminservice.getIdItem());
 
-  nombre = this.productosh.nombre;
-  precio = this.productosh.precio;
-  categoria = this.productosh.categoria;
-  descripcion = this.productosh.descripcion;
-  marca = this.productosh.marca;
-  codigo = this.productosh.codigo;
-  existencias = this.productosh.existencia;
-  url = this.productosh.url;
+  id = 0;
+  nombre = '';
+  precio = 0;
+  categoria = '';
+  descripcion = '';
+  marca = '';
+  codigo = '';
+  existencias = 0;
+  url = '';
 
   constructor(
     private adminservice: AdminsService,
@@ -31,12 +32,12 @@ export class AdminEditItemComponent implements OnInit {
 
   ngOnInit() {
   }
+
   editar() {
-    const p = new producto(this.adminservice.lastId, this.nombre, this.precio,
+    const p = new producto(this.id, this.nombre, this.precio,
       this.categoria, this.descripcion, this.marca, this.codigo, this.existencias, this.url);
     this.adminservice.actualizarItem(p);
   }
-  // productoToShow() {
-  //   productosh = this.adminservice.getItem();
-  // }
+
+
 }

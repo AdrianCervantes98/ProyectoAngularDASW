@@ -1,3 +1,4 @@
+
 <div class="cart-page-container">
   <div class="cart-page-header">
       <h1>Carrito de compras</h1>
@@ -13,7 +14,7 @@
       <div class="cart-item-row" *ngFor="let item of carrito; let i = index">
         <!-- *ngFor="let cart of cartList;let i = index" -->
           <div class="cart-item-cell cart-item-product">
-              <div class="cart-item-thumbnail" [ngStyle]="{'background-image': 'url(https://www.sinplastico.com/3009-home_default/escoba-para-interior-de-pelo-natural.jpg)'}" >
+              <div class="cart-item-thumbnail" [ngStyle]="{'background-image': 'url(this.carrito[i].url)'}" >
                 
               </div>
               <div class="cart-item-info">
@@ -22,7 +23,7 @@
               </div>
           </div>
           <div class="cart-item-cell cart-item-quantity">
-              
+              {{this.cantidad[i]}}
           </div>
           <div class="cart-item-cell cart-item-total">
               <div class="item-price">

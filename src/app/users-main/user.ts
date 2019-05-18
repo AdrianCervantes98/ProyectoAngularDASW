@@ -6,6 +6,8 @@ export class User {
         public fecha: Date,
         public cp: number,
         public mail: string,
-        public password: string
+        public password: string,
+        public rol: string,
+        public token: string
     ) { }
 }

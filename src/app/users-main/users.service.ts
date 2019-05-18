@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { User } from './user';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
+
 
 @Injectable({
   providedIn: 'root'
@@ -8,50 +11,21 @@ import { User } from './user';
 export class UsersService {
 
   cambiaDato = new Subject<User[]>();
-  private lastid = 1;
+  lastid;
   userLogged = false;
   loggedUser: User;
   admin: boolean;
+  local = environment.apiUrl;
+  
 
-  users: User[] = [
-    new User(this.lastid++, 'Pallandro', 'Avenida Primavera 123', new Date('05-03-1998'), 45050, 'pallandro@iteso.mx', 'pallandro'),
-    new User(this.lastid++, 'Ian Gibson', 'Guadalupe 123', new Date('02-12-1998'), 46111, 'iangibson@iteso.mx', 'iangibson'),
-    new User(this.lastid++, 'Harry Beltran', 'Cerro del cuatro 123', new Date('08-10-1996'), 45110, 'harry@iteso.mx', 'harrybeltran'),
-    new User(this.lastid++, 'a', 'Avenida Primavera 123', new Date('05-03-1998'), 45050, 'a@iteso.mx', 'pallandro'),
-    new User(this.lastid++, 'b', 'Avenida Primavera 123', new Date('05-03-1998'), 45050, 'b@iteso.mx', 'pallandro'),
-    new User(this.lastid++, 'c', 'Avenida Primavera 123', new Date('05-03-1998'), 45050, 'c@iteso.mx', 'pallandro'),
-    new User(this.lastid++, 'd', 'Avenida Primavera 123', new Date('05-03-1998'), 45050, 'd@iteso.mx', 'pallandro'),
-    new User(this.lastid++, 'e', 'Avenida Primavera 123', new Date('05-03-1998'), 45050, 'e@iteso.mx', 'pallandro'),
-    new User(this.lastid++, 'f', 'Avenida Primavera 123', new Date('05-03-1998'), 45050, 'f@iteso.mx', 'pallandro'),
-    new User(this.lastid++, 'g', 'Avenida Primavera 123', new Date('05-03-1998'), 45050, 'g@iteso.mx', 'pallandro'),
-    new User(this.lastid++, 'h', 'Avenida Primavera 123', new Date('05-03-1998'), 45050, 'h@iteso.mx', 'pallandro'),
-    new User(this.lastid++, 'i', 'Avenida Primavera 123', new Date('05-03-1998'), 45050, 'i@iteso.mx', 'pallandro'),
-    new User(this.lastid++, 'j', 'Avenida Primavera 123', new Date('05-03-1998'), 45050, 'j@iteso.mx', 'pallandro'),
-  ];
 
-  usersMails: string[] = [
-    'pallandro@iteso.mx',
-    'iangibson@iteso.mx',
-    'harry@iteso.mx',
-    'a@iteso.mx',
-    'b@iteso.mx',
-    'c@iteso.mx',
-    'd@iteso.mx',
-    'e@iteso.mx',
-    'f@iteso.mx',
-    'g@iteso.mx',
-    'h@iteso.mx',
-    'i@iteso.mx',
-    'j@iteso.mx',
-  ];
+  public users: User[] = [];
 
-  admins: string[] = [
-    'pallandro@iteso.mx',
-    'iangibson@iteso.mx',
-    'harry@iteso.mx'
-  ];
+  usersMails: string[] = [];
 
-  constructor() { }
+  admins: string[] = [];
+
+  constructor(private http: HttpClient) { }
 
   getNextId(): number {
     return this.lastid;
@@ -70,23 +44,97 @@ export class UsersService {
   }
 
   addUser(user: User) {
-    user.id = this.lastid;
+    this.getUsers();
+    const body = {
+      id: this.lastid + 1,
+      nombre: user.nombre,
+      domicilio: user.domicilio,
+      fecha: user.fecha,
+      cp: user.cp,
+      mail: user.mail,
+      password: user.password,
+      rol: 'user',
+      token: '123'
+    };
+    //console.log(JSON.stringify(body));
+
+    this.http.post(this.local + '/usuarios', body)
+      .subscribe((data: User) => {
+        console.log(data);
+      }, (err) => {
+        console.log(err);
+      });
     if (!this.containsMail(user.mail)) {
       this.addMail(user.mail);
       this.users.push(Object.assign({}, user));
-      this.lastid++;
       this.notificarCambios();
     }
   }
 
-  editUser(user: User) {
-    const pos = this.users.findIndex(u => u.id === user.id);
-    Object.assign(this.users[pos], user);
-    this.notificarCambios();
+  getLoggedUser(mail) {
+    this.http.get(this.local + '/usuario/' + mail)
+      .subscribe((data: User) => {
+        this.loggedUser = data;
+        console.log(data);
+      }, (err) => {
+        console.log(err);
+      });
   }
 
-  getUsers(): User[] {
-    return this.users.slice();
+  logIn(email, pw) {
+    const body = {
+      mail: email,
+      password: pw,
+    }
+    this.http.post(this.local + '/user/login', body)
+      .subscribe((data: User) => {
+      }, (err) => {
+        console.log(err);
+      });
+  }
+
+  editUser(user: User) {
+    const body = {
+      id: user.id,
+      nombre: user.nombre,
+      domicilio: user.domicilio,
+      fecha: user.fecha,
+      cp: user.cp,
+      mail: user.mail,
+      password: user.password,
+      rol: user.rol,
+      token: user.token
+    };
+    this.getLoggedUser(this.loggedUser.mail);
+    this.http.patch(this.local + '/usuario/' + this.loggedUser.mail, body,  {headers: {'x-auth': this.loggedUser.token}})
+      .subscribe((data: User) => {
+        console.log(data);
+        const pos = this.users.findIndex(u => u.id === user.id);
+        Object.assign(this.users[pos], user);
+        this.notificarCambios();
+      }, (err) => {
+        console.log(err);
+      });
+      // const pos = this.users.findIndex(u => u.id === user.id);
+      // Object.assign(this.users[pos], user);
+      // this.notificarCambios();
+  }
+
+  getUsers() {
+    this.http.get(this.local + '/usuarios')
+      .subscribe((data: User[]) => {
+        this.users = data;
+        this.lastid = this.users.length;
+        this.users.forEach(u => {
+          this.addMail(u.mail);
+          if (u.rol === 'admin') {
+            this.admins.push(u.mail);
+          }
+        });
+        console.log(this.users);
+      }, (err) => {
+        console.log(err);
+      });
   }
 
   getUser(id: number): User {
@@ -110,6 +158,5 @@ export class UsersService {
       return posMail;
     }
   }
-
 
 }

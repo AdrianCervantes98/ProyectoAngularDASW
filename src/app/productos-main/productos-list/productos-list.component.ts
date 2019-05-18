@@ -27,6 +27,7 @@ export class ProductosListComponent implements OnInit {
 
   ngOnInit() {
     this.currentPage(1);
+    this.productoService.getProductos();
   }
 
   inspeccionar(producto) {
@@ -37,13 +38,13 @@ export class ProductosListComponent implements OnInit {
     //Muestra normal del paginado
     this.showSearch = false;
     if (id === 1) {
-      this.productos = this.productoService.getProductos().slice(0, 6);
+      this.productos = this.productoService.productos.slice(0, 6);
     } else if (id === 2) {
-      this.productos = this.productoService.getProductos().slice(6, 12);
+      this.productos = this.productoService.productos.slice(6, 12);
     } else if (id === 3) {
-      this.productos = this.productoService.getProductos().slice(12, 18);
+      this.productos = this.productoService.productos.slice(12, 18);
     } else {
-      this.productos = this.productoService.getProductos().slice(18, 24);
+      this.productos = this.productoService.productos.slice(18, 24);
     }
   }
 

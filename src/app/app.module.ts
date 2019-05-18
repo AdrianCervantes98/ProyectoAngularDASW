@@ -21,7 +21,6 @@ import { ProductosListComponent } from './productos-main/productos-list/producto
 import { ProductosEditComponent } from './productos-main/productos-edit/productos-edit.component';
 import { ProductoDetailComponent } from './productos-main/producto-detail/producto-detail.component';
 import { ProductoComponent } from './productos-main/productos-list/producto/producto.component';
-import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { AdminAddComponent } from './admins-main/admin-edit/admin-add/admin-add.component';
 import { AdminDelComponent } from './admins-main/admin-edit/admin-del/admin-del.component';
 import { AdminEditItemComponent } from './admins-main/admin-edit/admin-edit-item/admin-edit-item.component';
@@ -66,7 +65,6 @@ import { VentaComponent } from './venta/venta.component';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    BsDropdownModule.forRoot(),
   ],
   providers: [ProductoDetailComponent, ProductosService, VentaComponent],
   bootstrap: [AppComponent]

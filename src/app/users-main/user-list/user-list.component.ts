@@ -28,6 +28,7 @@ export class UserListComponent implements OnInit {
         this.users = arrayUsers;
       }
     );
+    this.userService.getUsers();
   }
 
   editar(user: User) {
@@ -42,11 +43,11 @@ export class UserListComponent implements OnInit {
   currentPage(id) {
     this.searchDisplay = false;
     if (id === 1) {
-      this.users = this.userService.getUsers().slice(0, 5);
+      this.users = this.userService.users.slice(0, 5);
     } else if (id === 2) {
-      this.users = this.userService.getUsers().slice(5, 10);
+      this.users = this.userService.users.slice(5, 10);
     } else {
-      this.users = this.userService.getUsers().slice(10, 15);
+      this.users = this.userService.users.slice(10, 15);
     }
   }
 
